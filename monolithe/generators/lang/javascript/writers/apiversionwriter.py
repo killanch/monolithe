@@ -32,10 +32,14 @@ class APIVersionWriter(TemplateFileWriter):
         self.model_directory = "%s/javascript/%s/models" % (output, api_info["version"])
         self.abstract_directory =  "%s/abstract" % self.model_directory
         self.enum_directory =  "%s/enums" % self.model_directory
+        self.locale_directory = "/tmp/locale"
 
         if os.path.exists(self.model_directory):
             shutil.rmtree(self.model_directory)
 
+        if os.path.exists(self.locale_directory):
+            shutil.rmtree(self.locale_directory)
+            
         self.api_root = api_info["root"]
         self._class_prefix = monolithe_config.get_option("class_prefix", "transformer")
 
@@ -65,6 +69,11 @@ class APIVersionWriter(TemplateFileWriter):
                     template_name="enum_index.js.tpl",
                     class_prefix = self._class_prefix,
                     enum_list = self.enum_list)
+                    
+        self.write(destination = self.locale_directory,
+                    filename="locale_eng.json",
+                    template_name="locale_eng.json.tpl",
+                    specifications = specifications)
 
     def _write_abstract_named_entity(self):
         """ This method generated AbstractNamedEntity class js file.
