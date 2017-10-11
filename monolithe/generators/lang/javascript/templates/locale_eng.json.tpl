@@ -3,12 +3,12 @@
        "entity": {
            "title": "{{ specification.userlabel }}",
            "description": "{{ specification.description}}"
-       },
+       }{% if specification.attributes %},{% endif %}
        {%- for attribute in specification.attributes %}
        "{{ attribute.name }}":{
            "label": "{{ attribute.userlabel }}",
            "tooltip": "{{ attribute.description }}"
-       },{% endfor %}
-   },{% endfor %}
+       }{% if not loop.last %},{% endif %}{% endfor %}
+   }{% if not loop.last %},{% endif %}{% endfor %}
 }
 
