@@ -4,7 +4,7 @@ import os
 import shutil
 
 base_attrs = ['entityScope', 'externalID', 'lastUpdatedBy']
-named_entity_attrs = ['name', 'description']
+named_entity_attrs = ['name111', 'description111']
 
 iptype_enum_attr = SpecificationAttribute()
 iptype_enum_attr.name = 'IPType'
